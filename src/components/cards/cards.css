@@ -1,0 +1,15 @@
+#cards {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    padding: 10px;
+  }
+  
+  #cardbuttons {
+    margin: 5px;
+  }
+
+  #singleCard{
+    margin: 10px;
+  }
+  
