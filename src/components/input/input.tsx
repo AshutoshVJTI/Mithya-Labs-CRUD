@@ -51,11 +51,13 @@ const Input = () => {
   };
 
   const handleUpdateSubmit = (id: number) => {
-    const person: any = user.find((p: User) => p.id === id);
-    person.name = userInput.name;
-    person.gender = userInput.gender;
-    person.age = userInput.age;
-    person.id = id;
+    const person: User | undefined = user.find((p: User) => p.id === id);
+    if (typeof person !== "undefined") {
+      person.name = userInput.name;
+      person.gender = userInput.gender;
+      person.age = userInput.age;
+      person.id = id;
+    }
     const persons: any = user.filter((p: User) => p.id !== id);
     persons.splice(id - 1, 0, person);
     setUser(persons);
@@ -116,7 +118,7 @@ const Input = () => {
           <div>
             <TextField
               label="Enter your age"
-              type="string"
+              type="number"
               variant="filled"
               required
               value={userInput.age}
