@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Mithya-Labs-CRUD/static/css/main.a7d5e372.css",
-    "main.js": "/Mithya-Labs-CRUD/static/js/main.b851adcf.js",
+    "main.js": "/Mithya-Labs-CRUD/static/js/main.be0f89e0.js",
     "static/js/787.427b8b82.chunk.js": "/Mithya-Labs-CRUD/static/js/787.427b8b82.chunk.js",
     "index.html": "/Mithya-Labs-CRUD/index.html",
     "main.a7d5e372.css.map": "/Mithya-Labs-CRUD/static/css/main.a7d5e372.css.map",
-    "main.b851adcf.js.map": "/Mithya-Labs-CRUD/static/js/main.b851adcf.js.map",
+    "main.be0f89e0.js.map": "/Mithya-Labs-CRUD/static/js/main.be0f89e0.js.map",
     "787.427b8b82.chunk.js.map": "/Mithya-Labs-CRUD/static/js/787.427b8b82.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a7d5e372.css",
-    "static/js/main.b851adcf.js"
+    "static/js/main.be0f89e0.js"
   ]
 }
