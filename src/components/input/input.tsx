@@ -5,7 +5,6 @@ import Cards from "../cards/cards.tsx";
 import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 
 interface User {
   name: string;
