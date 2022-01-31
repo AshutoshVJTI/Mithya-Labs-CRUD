@@ -14,20 +14,10 @@ interface User {
   id: number;
 }
 
-const gender = [
-  {
-    value: "Male",
-  },
-  {
-    value: "Female",
-  },
-  {
-    value: "Other",
-  },
-];
+const gender = ["Male", "Female", "Other"];
 
 const Input = () => {
-  const [user, setUser] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [userInput, setUserInput] = useState({
     name: "",
     gender: "Male",
@@ -37,7 +27,7 @@ const Input = () => {
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 
   const handleSubmit = () => {
-    setUser((oldUser: User[]) => [...oldUser, userInput]);
+    setUsers((oldUser: User[]) => [...oldUser, userInput]);
     clearForm();
   };
 
@@ -51,17 +41,17 @@ const Input = () => {
   };
 
   const handleUpdateSubmit = (id: number) => {
-    const person: User | undefined = user.find((p: User) => p.id === id);
+    const person: User | undefined = users.find((p: User) => p.id === id);
     if (typeof person !== "undefined") {
       person.name = userInput.name;
       person.gender = userInput.gender;
       person.age = userInput.age;
       person.id = id;
     }
-    const persons: User[] | undefined = user.filter((p: User) => p.id !== id);
+    const persons: User[] | undefined = users.filter((p: User) => p.id !== id);
     if (typeof person !== "undefined") {
       persons.splice(id - 1, 0, person);
-      setUser(persons);
+      setUsers(persons);
     }
     setShowUpdateButton(false);
     clearForm();
@@ -69,7 +59,7 @@ const Input = () => {
 
   const fillForm = (id: number) => {
     setShowUpdateButton(true);
-    const person: User | undefined = user.find((p: User) => p.id === id);
+    const person: User | undefined = users.find((p: User) => p.id === id);
     if (typeof person !== "undefined") {
       setUserInput({
         name: person.name,
@@ -81,8 +71,8 @@ const Input = () => {
   };
 
   const deleteCard = (id: number) => {
-    const otherCards = user.filter((p: User) => p.id !== id);
-    setUser(otherCards);
+    const otherCards = users.filter((p: User) => p.id !== id);
+    setUsers(otherCards);
   };
 
   const handleChange = (input: string, type: string) => {
@@ -113,8 +103,8 @@ const Input = () => {
               onChange={(e) => handleChange(e.target.value, "gender")}
             >
               {gender.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.value}
+                <MenuItem key={option} value={option}>
+                  {option}
                 </MenuItem>
               ))}
             </TextField>
@@ -148,7 +138,7 @@ const Input = () => {
         </form>
       </div>
       <div id="Cards">
-        <Cards data={user} updater={fillForm} deleter={deleteCard} />
+        <Cards data={users} updater={fillForm} deleter={deleteCard} />
       </div>
     </>
   );
