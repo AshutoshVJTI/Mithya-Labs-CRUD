@@ -58,22 +58,26 @@ const Input = () => {
       person.age = userInput.age;
       person.id = id;
     }
-    const persons: any = user.filter((p: User) => p.id !== id);
-    persons.splice(id - 1, 0, person);
-    setUser(persons);
+    const persons: User[] | undefined = user.filter((p: User) => p.id !== id);
+    if (typeof person !== "undefined") {
+      persons.splice(id - 1, 0, person);
+      setUser(persons);
+    }
     setShowUpdateButton(false);
     clearForm();
   };
 
   const fillForm = (id: number) => {
     setShowUpdateButton(true);
-    const person: any = user.find((p: User) => p.id === id);
-    setUserInput({
-      name: person.name,
-      gender: person.gender,
-      age: person.age,
-      id: person.id,
-    });
+    const person: User | undefined = user.find((p: User) => p.id === id);
+    if (typeof person !== "undefined") {
+      setUserInput({
+        name: person.name,
+        gender: person.gender,
+        age: person.age,
+        id: person.id,
+      });
+    }
   };
 
   const deleteCard = (id: number) => {
