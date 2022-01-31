@@ -48,8 +48,6 @@ const Input = () => {
       age: "",
       id: userInput.id + 1,
     });
-    (document.getElementById("input-select") as HTMLInputElement).value =
-      "Male";
   };
 
   const handleUpdateSubmit = () => {
@@ -76,8 +74,6 @@ const Input = () => {
       id: person.id,
     });
     setCurrId(id);
-    (document.getElementById("input-select") as HTMLInputElement).value =
-      person.gender;
   };
 
   const deleteCard = (id: number) => {
