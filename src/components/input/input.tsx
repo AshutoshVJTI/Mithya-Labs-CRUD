@@ -5,6 +5,7 @@ import Cards from "../cards/cards.tsx";
 import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 interface User {
   name: string;
@@ -33,7 +34,6 @@ const Input = () => {
     age: "",
     id: 1,
   });
-  const [currId, setCurrId] = useState(0);
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 
   const handleSubmit = () => {
@@ -50,15 +50,14 @@ const Input = () => {
     });
   };
 
-  const handleUpdateSubmit = () => {
-    const idx: number = currId;
-    const person: any = user.find((p: any) => p.id === idx);
+  const handleUpdateSubmit = (id: number) => {
+    const person: any = user.find((p: User) => p.id === id);
     person.name = userInput.name;
     person.gender = userInput.gender;
     person.age = userInput.age;
-    person.id = idx;
-    const persons: any = user.filter((p: any) => p.id !== idx);
-    persons.splice(idx - 1, 0, person);
+    person.id = id;
+    const persons: any = user.filter((p: User) => p.id !== id);
+    persons.splice(id - 1, 0, person);
     setUser(persons);
     setShowUpdateButton(false);
     clearForm();
@@ -66,19 +65,22 @@ const Input = () => {
 
   const fillForm = (id: number) => {
     setShowUpdateButton(true);
-    const person: any = user.find((p: any) => p.id === id);
+    const person: any = user.find((p: User) => p.id === id);
     setUserInput({
       name: person.name,
       gender: person.gender,
       age: person.age,
       id: person.id,
     });
-    setCurrId(id);
   };
 
   const deleteCard = (id: number) => {
-    const otherCards = user.filter((p: any) => p.id !== id);
+    const otherCards = user.filter((p: User) => p.id !== id);
     setUser(otherCards);
+  };
+
+  const handleChange = (input: string, type: string) => {
+    setUserInput(Object.assign({}, userInput, { [type]: input }));
   };
 
   return (
@@ -92,14 +94,7 @@ const Input = () => {
               variant="filled"
               required
               value={userInput.name}
-              onChange={(e) =>
-                setUserInput({
-                  name: e.target.value,
-                  gender: userInput.gender,
-                  age: userInput.age,
-                  id: userInput.id,
-                })
-              }
+              onChange={(e) => handleChange(e.target.value, "name")}
             />
           </div>
           <div>
@@ -109,14 +104,7 @@ const Input = () => {
               label="Select Gender"
               value={userInput.gender}
               required
-              onChange={(e) =>
-                setUserInput({
-                  name: userInput.name,
-                  gender: e.target.value,
-                  age: userInput.age,
-                  id: userInput.id,
-                })
-              }
+              onChange={(e) => handleChange(e.target.value, "gender")}
             >
               {gender.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -132,14 +120,7 @@ const Input = () => {
               variant="filled"
               required
               value={userInput.age}
-              onChange={(e) =>
-                setUserInput({
-                  name: userInput.name,
-                  gender: userInput.gender,
-                  age: e.target.value,
-                  id: userInput.id,
-                })
-              }
+              onChange={(e) => handleChange(e.target.value, "age")}
             />
           </div>
           <div id="buttons">
@@ -152,7 +133,7 @@ const Input = () => {
               <Button
                 variant="outlined"
                 value="Update"
-                onClick={handleUpdateSubmit}
+                onClick={() => handleUpdateSubmit(userInput.id)}
               >
                 Update
               </Button>

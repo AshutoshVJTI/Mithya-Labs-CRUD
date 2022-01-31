@@ -13,10 +13,10 @@ interface CardProps {
 }
 
 const Cards = (props: CardProps) => {
-  const fillForm = (val: any) => {
+  const fillForm = (val: CardProps["data"][0]) => {
     props.updater(val.id);
   };
-  const deleteCard = (val: any) => {
+  const deleteCard = (val: CardProps["data"][0]) => {
     props.deleter(val.id);
   };
 
@@ -26,7 +26,7 @@ const Cards = (props: CardProps) => {
         {props.data
           .slice(0)
           .reverse()
-          .map((val: any) => {
+          .map((val: CardProps["data"][0]) => {
             return (
               <Card variant="outlined" id="singleCard">
               <div id="cards">
