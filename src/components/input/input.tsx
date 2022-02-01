@@ -5,6 +5,9 @@ import UserList from "../userList/userList.tsx";
 import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import { useSelector, useDispatch } from "react-redux";
+// @ts-ignore
+import { addUser, updateUser } from "../../redux/actions/actions.tsx";
 
 export interface User {
   name: string;
@@ -16,7 +19,10 @@ export interface User {
 const gender = ["Male", "Female", "Other"];
 
 const Input = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const userList = useSelector((state: any) => state.userList);
+
+  const dispatcher = useDispatch();
+
   const [userInput, setUserInput] = useState<User>({
     name: "",
     gender: "Male",
@@ -26,7 +32,7 @@ const Input = () => {
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 
   const handleSubmit = () => {
-    setUsers([...users, userInput]);
+    dispatcher(addUser(userInput));
     clearForm();
   };
 
@@ -39,28 +45,18 @@ const Input = () => {
     });
   };
 
-  const handleUpdateSubmit = (id: number) => {
-    users.map((p: User) => {
-      if (p.id === id) {
-        Object.assign(p, userInput);
-      }
-      return null;
-    });
+  const handleUpdateSubmit = () => {
+    dispatcher(updateUser(userInput));
     setShowUpdateButton(false);
     clearForm();
   };
 
   const fillForm = (id: number) => {
     setShowUpdateButton(true);
-    const person: User | undefined = users.find((p: User) => p.id === id);
+    const person: User | undefined = userList.find((p: User) => p.id === id);
     if (typeof person !== "undefined") {
       setUserInput(person);
     }
-  };
-
-  const deleteCard = (id: number) => {
-    const otherCards = users.filter((p: User) => p.id !== id);
-    setUsers(otherCards);
   };
 
   const handleChange = (input: string, type: string) => {
@@ -117,7 +113,7 @@ const Input = () => {
               <Button
                 variant="outlined"
                 value="Update"
-                onClick={() => handleUpdateSubmit(userInput.id)}
+                onClick={handleUpdateSubmit}
               >
                 Update
               </Button>
@@ -126,7 +122,7 @@ const Input = () => {
         </form>
       </div>
       <div id="Cards">
-        <UserList data={users} updater={fillForm} deleter={deleteCard} />
+        <UserList data={userList} updater={fillForm} />
       </div>
     </>
   );

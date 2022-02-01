@@ -2,13 +2,19 @@ import "./userList.css";
 import Card from "@mui/material/Card";
 // @ts-ignore
 import { User } from "../input/input.tsx";
+import { useDispatch } from "react-redux";
+// @ts-ignore
+import { deleteUser } from "../../redux/actions/actions.tsx";
 
 const UserList = (props: User) => {
+  const dispatcher = useDispatch();
+
+  const deleteCard = (id: number) => {
+    dispatcher(deleteUser(id));
+  };
+
   const fillForm = (val: User) => {
     props.updater(val.id);
-  };
-  const deleteCard = (val: User) => {
-    props.deleter(val.id);
   };
 
   return (
@@ -18,29 +24,31 @@ const UserList = (props: User) => {
           .slice(0)
           .reverse()
           .map((val: User) => {
-            return (
-              <Card variant="outlined" id="singleCard">
-                <div id="cards">
-                  <span>Name: {val.name}</span>
-                  <span>Gender: {val.gender}</span>
-                  <span>Age: {val.age}</span>
-                  <div>
-                    <input
-                      id="cardbuttons"
-                      type="button"
-                      value="update"
-                      onClick={() => fillForm(val)}
-                    />
-                    <input
-                      id="cardbuttons"
-                      type="button"
-                      value="delete"
-                      onClick={() => deleteCard(val)}
-                    />
+            if (val.id !== 0) {
+              return (
+                <Card variant="outlined" id="singleCard">
+                  <div id="cards">
+                    <span>Name: {val.name}</span>
+                    <span>Gender: {val.gender}</span>
+                    <span>Age: {val.age}</span>
+                    <div>
+                      <input
+                        id="cardbuttons"
+                        type="button"
+                        value="update"
+                        onClick={() => fillForm(val)}
+                      />
+                      <input
+                        id="cardbuttons"
+                        type="button"
+                        value="delete"
+                        onClick={() => deleteCard(val.id)}
+                      />
+                    </div>
                   </div>
-                </div>
-              </Card>
-            );
+                </Card>
+              );
+            } else return null;
           })}
       </div>
     </>
