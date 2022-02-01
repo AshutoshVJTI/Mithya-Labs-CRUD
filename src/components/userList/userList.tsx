@@ -3,12 +3,7 @@ import Card from "@mui/material/Card";
 // @ts-ignore
 import { User } from "../input/input.tsx";
 
-interface CardProps {
-  updater: (id: number) => void;
-  deleter: (id: number) => void;
-}
-
-const UserList = (props: CardProps | User) => {
+const UserList = (props: User) => {
   const fillForm = (val: User) => {
     props.updater(val.id);
   };
