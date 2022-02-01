@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./input.css";
 // @ts-ignore
-import Cards from "../cards/cards.tsx";
+import UserList from "../userList/userList.tsx";
 import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
-interface User {
+export interface User {
   name: string;
   gender: string;
   age: string;
@@ -17,7 +17,7 @@ const gender = ["Male", "Female", "Other"];
 
 const Input = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [userInput, setUserInput] = useState({
+  const [userInput, setUserInput] = useState<User>({
     name: "",
     gender: "Male",
     age: "",
@@ -26,7 +26,7 @@ const Input = () => {
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 
   const handleSubmit = () => {
-    setUsers((oldUser: User[]) => [...oldUser, userInput]);
+    setUsers([...users, userInput]);
     clearForm();
   };
 
@@ -40,18 +40,12 @@ const Input = () => {
   };
 
   const handleUpdateSubmit = (id: number) => {
-    const person: User | undefined = users.find((p: User) => p.id === id);
-    if (typeof person !== "undefined") {
-      person.name = userInput.name;
-      person.gender = userInput.gender;
-      person.age = userInput.age;
-      person.id = id;
-    }
-    const persons: User[] | undefined = users.filter((p: User) => p.id !== id);
-    if (typeof person !== "undefined") {
-      persons.splice(id - 1, 0, person);
-      setUsers(persons);
-    }
+    users.map((p: User) => {
+      if (p.id === id) {
+        Object.assign(p, userInput);
+      }
+      return null;
+    });
     setShowUpdateButton(false);
     clearForm();
   };
@@ -60,12 +54,7 @@ const Input = () => {
     setShowUpdateButton(true);
     const person: User | undefined = users.find((p: User) => p.id === id);
     if (typeof person !== "undefined") {
-      setUserInput({
-        name: person.name,
-        gender: person.gender,
-        age: person.age,
-        id: person.id,
-      });
+      setUserInput(person);
     }
   };
 
@@ -137,7 +126,7 @@ const Input = () => {
         </form>
       </div>
       <div id="Cards">
-        <Cards data={users} updater={fillForm} deleter={deleteCard} />
+        <UserList data={users} updater={fillForm} deleter={deleteCard} />
       </div>
     </>
   );

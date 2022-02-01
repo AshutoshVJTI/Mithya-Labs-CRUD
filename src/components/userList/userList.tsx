@@ -1,22 +1,18 @@
-import "./cards.css";
+import "./userList.css";
 import Card from "@mui/material/Card";
+// @ts-ignore
+import { User } from "../input/input.tsx";
 
 interface CardProps {
-  data: {
-    name: string;
-    gender: string;
-    age: string;
-    id: number;
-  }[];
   updater: (id: number) => void;
   deleter: (id: number) => void;
 }
 
-const Cards = (props: CardProps) => {
-  const fillForm = (val: CardProps["data"][0]) => {
+const UserList = (props: CardProps | User) => {
+  const fillForm = (val: User) => {
     props.updater(val.id);
   };
-  const deleteCard = (val: CardProps["data"][0]) => {
+  const deleteCard = (val: User) => {
     props.deleter(val.id);
   };
 
@@ -26,7 +22,7 @@ const Cards = (props: CardProps) => {
         {props.data
           .slice(0)
           .reverse()
-          .map((val: CardProps["data"][0]) => {
+          .map((val: User) => {
             return (
               <Card variant="outlined" id="singleCard">
                 <div id="cards">
@@ -56,4 +52,4 @@ const Cards = (props: CardProps) => {
   );
 };
 
-export default Cards;
+export default UserList;
