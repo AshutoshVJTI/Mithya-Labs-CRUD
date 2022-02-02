@@ -12,6 +12,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Input />} />
+          <Route path="/mithya-labs-crud" element={<Input />} />
           <Route path="/cards/user/:id" element={<SingleUser />} />
         </Routes>
       </div>

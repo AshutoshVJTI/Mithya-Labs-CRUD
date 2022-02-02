@@ -1,16 +1,15 @@
 #cards {
-    display: flex;
-    flex-direction: column;
-    margin: 25px;
-    padding: 0px;
-  }
-  
-  #cardbuttons {
-    margin: 0px 5px 5px 5px;
-    z-index: 1;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  padding: 0px;
+}
 
-  #singleCard{
-    margin: 10px;
-  }
-  
+#cardbuttons {
+  margin: 0px 5px 5px 5px;
+  z-index: 1;
+}
+
+#singleCard {
+  margin: 10px;
+}
