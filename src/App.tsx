@@ -1,4 +1,4 @@
-import React from "react";
++import React from "react";
 import "./App.css";
 // @ts-ignore
 import Input from "./components/input/input.tsx";
@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
+          <Input />
     <BrowserRouter>
       <div className="App">
         <Routes>
