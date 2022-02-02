@@ -28,7 +28,7 @@ const UserList = (props: User) => {
             if (val.id !== 0) {
               return (
                 <Card variant="outlined" id="singleCard">
-                  <Link to={`/cards/user/${val.id}`}>
+                  <Link to={`/user/${val.id}`}>
                     <div id="cards">
                       <span>Name: {val.name}</span>
                       <span>Gender: {val.gender}</span>
