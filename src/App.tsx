@@ -1,4 +1,4 @@
-import React from "react";
++import React from "react";
 import "./App.css";
 // @ts-ignore
 import Input from "./components/input/input.tsx";
@@ -10,13 +10,15 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+      
         <Routes>
           <Route path="/" element={<Input />} />
           <Route path="/mithya-labs-crud" element={<Input />} />
           <Route path="/cards/user/:id" element={<SingleUser />} />
         </Routes>
+         
       </div>
-    </BrowserRouter>
+      </BrowserRouter>
   );
 }
 
