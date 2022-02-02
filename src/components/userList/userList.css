@@ -1,12 +1,13 @@
 #cards {
     display: flex;
     flex-direction: column;
-    margin: 15px;
-    padding: 10px;
+    margin: 25px;
+    padding: 0px;
   }
   
   #cardbuttons {
-    margin: 5px;
+    margin: 0px 5px 5px 5px;
+    z-index: 1;
   }
 
   #singleCard{

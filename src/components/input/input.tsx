@@ -27,7 +27,7 @@ const Input = () => {
     name: "",
     gender: "Male",
     age: "",
-    id: 1,
+    id: userList.length,
   });
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 

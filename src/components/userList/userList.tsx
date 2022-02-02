@@ -5,6 +5,7 @@ import { User } from "../input/input.tsx";
 import { useDispatch } from "react-redux";
 // @ts-ignore
 import { deleteUser } from "../../redux/actions/actions.tsx";
+import { Link } from "react-router-dom";
 
 const UserList = (props: User) => {
   const dispatcher = useDispatch();
@@ -27,24 +28,26 @@ const UserList = (props: User) => {
             if (val.id !== 0) {
               return (
                 <Card variant="outlined" id="singleCard">
-                  <div id="cards">
-                    <span>Name: {val.name}</span>
-                    <span>Gender: {val.gender}</span>
-                    <span>Age: {val.age}</span>
-                    <div>
-                      <input
-                        id="cardbuttons"
-                        type="button"
-                        value="update"
-                        onClick={() => fillForm(val)}
-                      />
-                      <input
-                        id="cardbuttons"
-                        type="button"
-                        value="delete"
-                        onClick={() => deleteCard(val.id)}
-                      />
+                  <Link to={`/cards/user/${val.id}`}>
+                    <div id="cards">
+                      <span>Name: {val.name}</span>
+                      <span>Gender: {val.gender}</span>
+                      <span>Age: {val.age}</span>
                     </div>
+                  </Link>
+                  <div>
+                    <input
+                      id="cardbuttons"
+                      type="button"
+                      value="update"
+                      onClick={() => fillForm(val)}
+                    />
+                    <input
+                      id="cardbuttons"
+                      type="button"
+                      value="delete"
+                      onClick={() => deleteCard(val.id)}
+                    />
                   </div>
                 </Card>
               );
