@@ -8,15 +8,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-          <Input />
-    <BrowserRouter>
       <div className="App">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Input />} />
           <Route path="/cards/user/:id" element={<SingleUser />} />
         </Routes>
+         </BrowserRouter>
       </div>
-    </BrowserRouter>
   );
 }
 
