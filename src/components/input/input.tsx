@@ -4,17 +4,10 @@ import UserList from "../userList/userList.tsx";
 import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import { useSelector, useDispatch } from "react-redux";
-// @ts-ignore
-import { addUser, updateUser } from "../../redux/actions/actions.tsx";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import { createUseStyles } from "react-jss";
-
-export interface User {
-  name: string;
-  gender: string;
-  age: string;
-  id: number;
-}
+// @ts-ignore
+import { User } from '../../TypeScript/types.tsx';
 
 const styles: any = createUseStyles({
   wrapper: {
@@ -47,9 +40,11 @@ const gender = ["Male", "Female", "Other"];
 const Input = () => {
   const classes = styles();
 
-  const userList = useSelector((state: any) => state.userList);
+  const userList = useStoreState((state: any) => state.userList.items);
 
-  const dispatcher = useDispatch();
+  const addUser = useStoreActions((actions: any) => actions.userList.addUser);
+  const updateUser = useStoreActions((actions: any) => actions.userList.updateUser);
+  console.log(userList);
 
   const [userInput, setUserInput] = useState<User>({
     name: "",
@@ -60,7 +55,8 @@ const Input = () => {
   const [showUpdateButton, setShowUpdateButton] = useState(false);
 
   const handleSubmit = () => {
-    dispatcher(addUser(userInput));
+    addUser(userInput);
+    // dispatcher(addUser(userInput));
     clearForm();
   };
 
@@ -74,7 +70,8 @@ const Input = () => {
   };
 
   const handleUpdateSubmit = () => {
-    dispatcher(updateUser(userInput));
+    updateUser(userInput);
+    // dispatcher(updateUser(userInput));
     setShowUpdateButton(false);
     clearForm();
   };

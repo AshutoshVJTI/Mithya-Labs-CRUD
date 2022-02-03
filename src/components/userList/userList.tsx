@@ -1,9 +1,7 @@
 import Card from "@mui/material/Card";
 // @ts-ignore
-import { User } from "../input/input.tsx";
-import { useDispatch } from "react-redux";
-// @ts-ignore
-import { deleteUser } from "../../redux/actions/actions.tsx";
+import { User } from '../../TypeScript/types.tsx';
+import { useStoreActions } from "easy-peasy";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createUseStyles } from "react-jss";
@@ -32,10 +30,12 @@ const styles: any = createUseStyles({
 const UserList = (props: User) => {
   const classes = styles();
 
-  const dispatcher = useDispatch();
+  const deleteUser = useStoreActions(
+    (actions: any) => actions.userList.deleteUser
+  );
 
   const deleteCard = (id: number) => {
-    dispatcher(deleteUser(id));
+    deleteUser(id);
   };
 
   const fillForm = (val: User) => {

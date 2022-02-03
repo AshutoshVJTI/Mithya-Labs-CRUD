@@ -1,13 +1,11 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import Card from "@mui/material/Card";
 // @ts-ignore
-import { User } from "../input/input.tsx";
+import { User } from '../../TypeScript/types.tsx';
 import Button from "@mui/material/Button";
-// @ts-ignore
-import { getSingleUser } from "../../redux/actions/actions.tsx";
 import { createUseStyles } from "react-jss";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 const styles: any = createUseStyles({
   cards: {
@@ -25,10 +23,12 @@ const SingleUser = () => {
   const classes = styles();
   const { id }: any = useParams();
   const currId: any = parseInt(id);
-  const dispatcher = useDispatch();
-  dispatcher(getSingleUser(currId));
-  const singleUser: User = useSelector(
-    (state: any) => state.singleUserObject[0]
+  const getSingleUser = useStoreActions(
+    (actions: any) => actions.userList.getSingleUser
+  );
+  getSingleUser(currId);
+  const singleUser: User = useStoreState(
+    (state: any) => state.userList.singleUserItem[0]
   );
 
   return (
