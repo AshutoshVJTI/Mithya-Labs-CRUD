@@ -44,7 +44,6 @@ const Input = () => {
 
   const addUser = useStoreActions((actions: any) => actions.userList.addUser);
   const updateUser = useStoreActions((actions: any) => actions.userList.updateUser);
-  console.log(userList);
 
   const [userInput, setUserInput] = useState<User>({
     name: "",
