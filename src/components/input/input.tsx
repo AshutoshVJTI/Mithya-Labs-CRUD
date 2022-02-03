@@ -55,7 +55,6 @@ const Input = () => {
 
   const handleSubmit = () => {
     addUser(userInput);
-    // dispatcher(addUser(userInput));
     clearForm();
   };
 
@@ -70,7 +69,6 @@ const Input = () => {
 
   const handleUpdateSubmit = () => {
     updateUser(userInput);
-    // dispatcher(updateUser(userInput));
     setShowUpdateButton(false);
     clearForm();
   };
