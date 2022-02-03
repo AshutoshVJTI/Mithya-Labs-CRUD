@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./input.css";
 // @ts-ignore
 import UserList from "../userList/userList.tsx";
 import { TextField } from "@mui/material";
@@ -8,6 +7,7 @@ import Button from "@mui/material/Button";
 import { useSelector, useDispatch } from "react-redux";
 // @ts-ignore
 import { addUser, updateUser } from "../../redux/actions/actions.tsx";
+import { createUseStyles } from "react-jss";
 
 export interface User {
   name: string;
@@ -16,9 +16,37 @@ export interface User {
   id: number;
 }
 
+const styles: any = createUseStyles({
+  wrapper: {
+    margin: "50px",
+    padding: "30px 40px 30px 30px",
+    border: "1px solid",
+    borderRadius: "5%",
+  },
+  Cards: {
+    justifyContent: "flex-start",
+    marginLeft: "10%",
+  },
+  form: {
+    fontSize: "20px",
+  },
+  form_div: {
+    margin: "15px",
+    width: "100%",
+  },
+  buttons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignContent: "center",
+  },
+});
+
 const gender = ["Male", "Female", "Other"];
 
 const Input = () => {
+  const classes = styles();
+
   const userList = useSelector((state: any) => state.userList);
 
   const dispatcher = useDispatch();
@@ -65,9 +93,9 @@ const Input = () => {
 
   return (
     <>
-      <div id="wrapper">
-        <form name="form1">
-          <div>
+      <div className={classes.wrapper}>
+        <form className={classes.form}>
+          <div className={classes.form_div}>
             <TextField
               label="Enter your name"
               type="string"
@@ -79,6 +107,7 @@ const Input = () => {
           </div>
           <div>
             <TextField
+              className={classes.form_div}
               id="outlined-select-currency-native"
               select
               label="Select Gender"
@@ -93,7 +122,7 @@ const Input = () => {
               ))}
             </TextField>
           </div>
-          <div>
+          <div className={classes.form_div}>
             <TextField
               label="Enter your age"
               type="number"
@@ -103,7 +132,7 @@ const Input = () => {
               onChange={(e) => handleChange(e.target.value, "age")}
             />
           </div>
-          <div id="buttons">
+          <div className={classes.buttons}>
             {!showUpdateButton ? (
               <Button variant="contained" value="Add" onClick={handleSubmit}>
                 Add
@@ -121,7 +150,7 @@ const Input = () => {
           </div>
         </form>
       </div>
-      <div id="Cards">
+      <div className={classes.Cards}>
         <UserList data={userList} updater={fillForm} />
       </div>
     </>
