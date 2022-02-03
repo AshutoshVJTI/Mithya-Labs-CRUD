@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 // @ts-ignore
 import { deleteUser } from "../../redux/actions/actions.tsx";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const UserList = (props: User) => {
   const dispatcher = useDispatch();
@@ -35,20 +36,12 @@ const UserList = (props: User) => {
                       <span>Age: {val.age}</span>
                     </div>
                   </Link>
-                  <div>
-                    <input
-                      id="cardbuttons"
-                      type="button"
-                      value="update"
-                      onClick={() => fillForm(val)}
-                    />
-                    <input
-                      id="cardbuttons"
-                      type="button"
-                      value="delete"
-                      onClick={() => deleteCard(val.id)}
-                    />
-                  </div>
+                  <Button id="cardbuttons" variant="outlined" color="success" onClick={() => fillForm(val)}>
+                    Update
+                  </Button>
+                  <Button id="cardbuttons" variant="outlined" color="error" onClick={() => deleteCard(val.id)}>
+                    Delete
+                  </Button>
                 </Card>
               );
             } else return null;

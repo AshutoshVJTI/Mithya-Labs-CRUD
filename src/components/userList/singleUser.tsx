@@ -1,39 +1,36 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "@mui/material/Card";
 import "./userList.css";
 // @ts-ignore
 import { User } from "../input/input.tsx";
+import Button from "@mui/material/Button";
+// @ts-ignore
+import { getSingleUser } from "../../redux/actions/actions.tsx";
 
 const SingleUser = () => {
-  const location: string = useLocation().pathname.slice(-1);
-  const currId: number = parseInt(location);
-  const userList = useSelector((state: any) => state.userList);
+  const {id}: any = useParams();
+  const currId: any = parseInt(id);
+  const dispatcher = useDispatch();
+  dispatcher(getSingleUser(currId));
+  const singleUser: User = useSelector((state: any) => state.singleUserObject[0]);
 
   return (
     <>
       <div>
-        {userList.map((val: User) => {
-          if (val.id === currId) {
-            return (
-              <>
-                <Card variant="outlined" id="singleCard">
-                  <div id="cards">
-                    <span>Name: {val.name}</span>
-                    <span>Gender: {val.gender}</span>
-                    <span>Age: {val.age}</span>
-                  </div>
-                </Card>
-              </>
-            );
-          } else return null;
-        })}
-      </div>
-      <div>
-        <Link to="/">
-          <input id="cardbuttons" type="button" value="Back" />
-        </Link>
+        <Card variant="outlined" id="singleCard">
+          <div id="cards">
+            <span>Name: {singleUser.name}</span>
+            <span>Gender: {singleUser.gender}</span>
+            <span>Age: {singleUser.age}</span>
+          </div>
+        </Card>
+        <div>
+          <Link to="/">
+            <Button variant="contained">Back</Button>
+          </Link>
+        </div>
       </div>
     </>
   );

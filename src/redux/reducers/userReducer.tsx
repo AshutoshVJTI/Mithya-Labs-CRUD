@@ -1,4 +1,4 @@
-import { ADD_USER, UPDATE_USER, DELETE_USER } from "../actions/types";
+import { ADD_USER, UPDATE_USER, DELETE_USER, GET_SINGLE_USER } from "../actions/types";
 
 const initialState = {
   userList: [
@@ -35,6 +35,16 @@ const userReducer = (state = initialState, action: any) => {
         ...state,
         userList: newUserList,
       };
+    
+    case GET_SINGLE_USER:
+      const singleUser = state.userList.filter(
+        (user) => user.id === action.payload
+      );
+      return {
+        ...state,
+        singleUserObject: singleUser,
+      };
+
     default:
       return state;
   }
