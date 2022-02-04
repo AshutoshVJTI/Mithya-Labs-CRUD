@@ -1,38 +1,40 @@
-import React from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 // @ts-ignore
 import { User } from "../../TypeScript/types.tsx";
 import Button from "@mui/material/Button";
-import { createUseStyles } from "react-jss";
+import { makeStyles } from "@mui/styles";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
-const styles: any = createUseStyles({
+const styles = makeStyles({
   cards: {
     display: "flex",
     flexDirection: "column",
-    margin: "25px",
+    margin: 25,
     padding: "0px",
   },
   singleCard: {
-    margin: "10px",
+    margin: 10,
   },
 });
 
 const SingleUser = () => {
   const classes = styles();
 
-  const { id }: any = useParams();
-  const currId: any = parseInt(id);
+  const { id }: User = useParams();
+  const currId: number = parseInt(id);
 
-  const getSingleUser = useStoreActions(
-    (actions: any) => actions.userList.getSingleUser
+  const getSingleUser: User = useStoreActions(
+    (actions: User) => actions.userList.getSingleUser
   );
-
-  getSingleUser(currId);
   
+  useEffect(() => {
+    getSingleUser(currId);
+  }, [getSingleUser, currId]);
+
   const singleUser: User = useStoreState(
-    (state: any) => state.userList.singleUserItem[0]
+    (state: User) => state.userList.singleUserItem
   );
 
   return (

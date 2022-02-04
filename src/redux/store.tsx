@@ -19,26 +19,26 @@ const store = createStore({
       id: 0,
     },
 
-    addUser: action((state: any, payload: any) => {
+    addUser: action((state: User, payload: User) => {
       state.items.push(payload);
     }),
 
-    updateUser: action((state: any, payload: any) => {
+    updateUser: action((state: User, payload: User) => {
       const newUserList = state.items.map((user: User) =>
         user.id === payload.id ? payload : user
       );
       state.items = newUserList;
     }),
 
-    deleteUser: action((state: any, payload: any) => {
+    deleteUser: action((state: User, payload: number) => {
       const filteredUserList = state.items.filter(
         (user: User) => user.id !== payload
       );
       state.items = filteredUserList;
     }),
     
-    getSingleUser: action((state: any, payload: any) => {
-      const singleUser = state.items.filter(
+    getSingleUser: action((state: User, payload: number) => {
+      const singleUser = state.items.find(
         (user: User) => user.id === payload
       );
       state.singleUserItem = singleUser;

@@ -5,13 +5,13 @@ import { TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import { useStoreState, useStoreActions } from "easy-peasy";
-import { createUseStyles } from "react-jss";
+import { makeStyles } from "@mui/styles";
 // @ts-ignore
 import { User } from '../../TypeScript/types.tsx';
 
-const styles: any = createUseStyles({
+const styles = makeStyles({
   wrapper: {
-    margin: "50px",
+    margin: 50,
     padding: "30px 40px 30px 30px",
     border: "1px solid",
     borderRadius: "5%",
@@ -21,11 +21,11 @@ const styles: any = createUseStyles({
     marginLeft: "10%",
   },
   form: {
-    fontSize: "20px",
+    fontSize: 20,
   },
   form_div: {
-    margin: "15px",
-    width: "100%",
+    margin: 15,
+    width: 200,
   },
   buttons: {
     display: "flex",
@@ -40,10 +40,10 @@ const gender = ["Male", "Female", "Other"];
 const Input = () => {
   const classes = styles();
 
-  const userList = useStoreState((state: any) => state.userList.items);
+  const userList: User[] = useStoreState((state: User) => state.userList.items);
 
-  const addUser = useStoreActions((actions: any) => actions.userList.addUser);
-  const updateUser = useStoreActions((actions: any) => actions.userList.updateUser);
+  const addUser: User = useStoreActions((actions: User) => actions.userList.addUser);
+  const updateUser: User = useStoreActions((actions: User) => actions.userList.updateUser);
 
   const [userInput, setUserInput] = useState<User>({
     name: "",

@@ -4,21 +4,21 @@ import { User } from '../../TypeScript/types.tsx';
 import { useStoreActions } from "easy-peasy";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { createUseStyles } from "react-jss";
+import { makeStyles } from "@mui/styles";
 
-const styles: any = createUseStyles({
+const styles = makeStyles({
   cards: {
     display: "flex",
     flexDirection: "column",
-    margin: "25px",
+    margin: 25,
     padding: "0px",
   },
   cardbuttons: {
     margin: "0px 5px 5px 5px",
-    width: "80px",
+    width: 80,
   },
   singleCard: {
-    margin: "10px",
+    margin: 10,
   },
   a: {
     textDecoration: "none",
@@ -30,8 +30,8 @@ const styles: any = createUseStyles({
 const UserList = (props: User) => {
   const classes = styles();
 
-  const deleteUser = useStoreActions(
-    (actions: any) => actions.userList.deleteUser
+  const deleteUser: User = useStoreActions(
+    (actions: User) => actions.userList.deleteUser
   );
 
   const deleteCard = (id: number) => {
