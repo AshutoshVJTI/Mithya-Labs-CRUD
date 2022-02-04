@@ -25,7 +25,7 @@ const styles = makeStyles({
   },
   form_div: {
     margin: 15,
-    width: 200,
+    width: "100%",
   },
   buttons: {
     display: "flex",
