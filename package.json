@@ -1,7 +1,7 @@
 {
   "name": "react-typescript-crud",
   "version": "0.1.0",
-  "homepage": "https://AshutoshVJTI.github.io/Mithya-Labs-CRUD/",
+  "homepage": "https://AshutoshVJTI.github.io/TypeScripr-CRUD/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
